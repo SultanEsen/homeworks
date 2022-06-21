@@ -22,21 +22,34 @@ def game():
     answer = 'y'
     print('Welcome to Casino Las Vegas!')
     while answer == 'y':
-        random_slot = choice([a, b, c, d, e, f])
-        # print(random_slot)
-        print(f'Your balance is {round_balance} USD')
-        n = int(input('Enter your lucky number from 1 to 30: '))
-        s = int(input('How much money are you putting into game: '))
-        if n in random_slot:
-            s = s * 2
-            round_balance += s
-            print(f'Congrats! You have won {s} USD! Your balance is {round_balance} USD')
+        if round_balance > 0:
+            random_slot = choice([a, b, c, d, e, f])
+            # print(random_slot)
+            print(f'Your balance is {round_balance} USD')
+            try:
+                n = int(input('Enter your lucky number from 1 to 30: '))
+                s = int(input('How much money are you putting into game: '))
+                if s > round_balance:
+                    print(f'Your current balance is {round_balance}. Use no more that this amount.')
+                else:
+                    if n in random_slot:
+                        s = s * 2
+                        round_balance += s
+                        print(f'Congrats! You have won {s} USD! Your balance is {round_balance} USD')
+                    else:
+                        round_balance -= s
+                        print(f'You lost {s} USD! Your balance is {round_balance} USD')
+                        if round_balance <= 0:
+                            print('You have no enough money in your balance. Looking forward to see you again in our Casino!')
+                            break
+                    answer = input('\nWill you play one more time? Type "y" or "n": ')
+                    if answer != 'y':
+                        if round_balance > start_balance_2:
+                            print(f'Your current balance is {round_balance} USD! You won {abs(start_balance_2 - round_balance)} USD')
+                        elif round_balance < start_balance_2:
+                            print(f'Your current balance is {round_balance} USD! You lost {start_balance_2 - round_balance} USD ')
+            except:
+                print('Enter only numbers')
         else:
-            round_balance -= s
-            print(f'You lost {s} USD! Your balance is {round_balance} USD')
-        answer = input('\nWill you play one more time? Type "y" or "n": ')
-    if answer != 'y':
-        if round_balance > start_balance_2:
-            print(f'Your current balance is {round_balance} USD! You won {abs(start_balance_2 - round_balance)} USD')
-        elif round_balance < start_balance_2:
-            print(f'Your current balance is {round_balance} USD! You lost {start_balance_2 - round_balance} USD ')
+            print('You have no enough money in your balance. Looking forward to see you again in our Casino!')
+            break
