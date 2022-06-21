@@ -30,7 +30,7 @@ def game():
                 n = int(input('Enter your lucky number from 1 to 30: '))
                 s = int(input('How much money are you putting into game: '))
                 if s > round_balance:
-                    print(f'Your current balance is {round_balance}. Use no more that this amount.')
+                    print(f'Your current balance is {round_balance}. Use no more than this amount.')
                 else:
                     if n in random_slot:
                         s = s * 2
